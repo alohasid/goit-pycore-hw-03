@@ -4,24 +4,19 @@ PHONE_CODE_NUMBER_BY_DEFAULT = '+38' # Can be changed to any country code
 PHONE_CODE_NUMBER_BY_DEFAULT_WITHOUT_PLUS = '38'
 
 def normalize_phone(phone_number: str) -> str:
-    # Remove all characters except digits and '+'
     cleaned_phone_number = re.sub(r'[^\d+]', '', phone_number)
     
-    # Check if the number starts with '+'
     if cleaned_phone_number.startswith('+'):
-        # If it starts with '+38' or '+380', return it as is
         if cleaned_phone_number.startswith(PHONE_CODE_NUMBER_BY_DEFAULT):
             print('if 1')
             return cleaned_phone_number
         else:
-            # If it starts with '+' but not '+38', replace the country code
             print('else 1')
             return PHONE_CODE_NUMBER_BY_DEFAULT + cleaned_phone_number[1:]
     elif cleaned_phone_number.startswith(PHONE_CODE_NUMBER_BY_DEFAULT_WITHOUT_PLUS):
         return PHONE_CODE_NUMBER_BY_DEFAULT + cleaned_phone_number[2:]
     else:
         print('else 2')
-        # If it does not start with '+', prepend the default country code
         return PHONE_CODE_NUMBER_BY_DEFAULT + cleaned_phone_number
 
 
